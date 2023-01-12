@@ -1,26 +1,45 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="page">
+      <header>
+        <img 
+          class="logo"
+          src="https://assets.fstatic.nl/master-25738/assets/components/logo/fundawonen-logo.svg" 
+          alt="Logo"
+        >
+      </header>
+      <PropertyDetails />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import PropertyDetails from './components/property/PropertyDetails.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    PropertyDetails
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style lang="scss">
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 64px;
+    width: 100%;
+    background-color: #f7a100;
+
+    .logo {
+      width: 100px;
+    }
+  }
 }
 </style>
