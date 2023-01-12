@@ -57,7 +57,7 @@ export default {
     PropertyCharacteristics
   },
   setup() {
-    const id = process.env.PROPERTY_ID;
+    const id = '1c7c6247-2639-4169-a93e-a8f0fe1c8ed4';
     const details = new PropertyDetailsViewmodel(id).model;
 
     return { 
@@ -99,10 +99,10 @@ export default {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    box-shadow: 0 0 8px 0 rgba(0,0,0,.2);
     width: 100%;
     height: 70px;
     background-color: white;
-    box-shadow: 0 0 8px 0 rgba(0,0,0,.2);
 
     &__name {
       width: 50%;
@@ -132,10 +132,10 @@ export default {
     @media (min-width: #{$l}) {
       flex-direction: column;
       margin: 36px;
+      border-radius: 5px;
       padding: 20px;
       width: 30%;
       height: 150px;
-      border-radius: 5px;
 
       &__name {
         width: 100%;

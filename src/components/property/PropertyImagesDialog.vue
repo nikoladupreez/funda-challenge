@@ -1,39 +1,46 @@
 <template>
-  <div v-if="modelValue" class="property-images-dialog">
+  <div 
+    v-if="modelValue" 
+    class="property-images-dialog"
+  >
     <div class="property-images-dialog__top">
-        <button @click="closeDialog"> Terug </button>
-        <button 
-            v-if="selectedImage"
-            @click="selectedImage = null"
-        > 
-            Bekijk alle {{images.length}} foto's 
-        </button>
-        <p v-else> Foto's {{ images.length }} </p>
-    </div>
-
-    <div 
+      <button @click="closeDialog"> 
+        Terug 
+      </button>
+      <button 
         v-if="selectedImage"
-         class="property-images-dialog__container"
-    >
-        <img 
-            class="property-images-dialog__selected-item"
-            :src="selectedImage.Url" 
-            alt="Property image"
-        >
+        @click="selectedImage = null"
+      > 
+        Bekijk alle {{images.length}} foto's 
+      </button>
+      <p v-else> 
+        Foto's {{ images.length }} 
+      </p>
     </div>
 
     <div 
-        v-else
-        class="property-images-dialog__list"
+      v-if="selectedImage"
+      class="property-images-dialog__container"
     >
-        <img 
-            v-for="(image, key) in images"
-            :key="key"
-            class="property-images-dialog__item"
-            :src="image.Url" 
-            alt="Property image"
-            @click="selectedImage = image"
-        >
+      <img 
+        class="property-images-dialog__selected-item"
+        :src="selectedImage.Url" 
+        alt="Property image"
+      >
+    </div>
+
+    <div 
+      v-else
+      class="property-images-dialog__list"
+    >
+      <img 
+        v-for="(image, key) in images"
+        :key="key"
+        class="property-images-dialog__item"
+        :src="image.Url" 
+        alt="Property image"
+        @click="selectedImage = image"
+      >
     </div>
   </div>
 </template>
@@ -42,91 +49,92 @@
 import { ref } from 'vue';
 
 export default {
-    name: "PropertyImagesDialog",
-    props: {
-        modelValue: {
-            type: Boolean,
-            default: false
-        },
-        images: {
-            type: Array,
-            required: true
-        }
-    },
-    emits: [ 'update:modelValue' ],
-    setup(_, { emit }) {
-        const selectedImage = ref(null);
-
-        function closeDialog() {
-            selectedImage.value = null;
-            emit('update:modelValue', false);
-        }
-        return {
-            selectedImage,
-            closeDialog
-        }
+  name: "PropertyImagesDialog",
+  props: {
+    modelValue: {
+      type: Boolean,
+      default: false
+  },
+    images: {
+      type: Array,
+      default: () => []
     }
+  },
+  emits: [ 'update:modelValue' ],
+  setup(_, { emit }) {
+    const selectedImage = ref(null);
+
+    function closeDialog() {
+      selectedImage.value = null;
+      emit('update:modelValue', false);
+    }
+
+    return {
+      selectedImage,
+      closeDialog
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 .property-images-dialog {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  width: 100vw;
+  min-height: calc(100vh - 64px);
+  background-color: white;
+
+  &__top {
     position: absolute;
-    z-index: 100;
     top: 0;
-    width: 100vw;
-    min-height: calc(100vh - 64px);
-    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    width: calc(100% - 20px);
 
-    &__top {
-        position: absolute;
-        top: 0;
-        width: calc(100% - 20px);
-        display: flex;
-        justify-content: space-between;
-        padding: 10px;
-
-        button {
-            text-decoration: underline;
-        }
-
-        @media (min-width: #{$m}) {
-            padding: 10px 15px;
-            width: calc(100% - 30px);
-        }
+    button {
+      text-decoration: underline;
     }
 
-    &__list {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-evenly;
-        margin-top: 40px;
+    @media (min-width: #{$m}) {
+      padding: 10px 15px;
+      width: calc(100% - 30px);
     }
+  }
 
-    &__item {
-        width: 45%;
-        margin-bottom: 12px;
-        cursor: pointer;
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-top: 40px;
+  }
 
-         @media (min-width: #{$m}) {
-             width: 47%;
-        }
+  &__item {
+    margin-bottom: 12px;
+    width: 45%;
+    cursor: pointer;
+
+      @media (min-width: #{$m}) {
+        width: 47%;
     }
+  }
 
-    &__container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: calc(100vh - 64px);
+  &__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 64px);
+  }
+
+  &__selected-item {
+    width: 100%;
+
+    @media (min-width: #{$l}) {
+      height: 80%;
+      width: auto;
     }
-
-    &__selected-item {
-        width: 100%;
-
-        @media (min-width: #{$l}) {
-            height: 80%;
-            width: auto;
-        }
-    }
+  }
 }
 </style>
