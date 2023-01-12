@@ -82,6 +82,9 @@ export default {
   position: absolute;
   z-index: 100;
   top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100vw;
   min-height: calc(100vh - 64px);
   background-color: white;
@@ -102,6 +105,10 @@ export default {
       padding: 10px 15px;
       width: calc(100% - 30px);
     }
+
+    @media (min-width: #{$l}) {
+      max-width: 1440px;
+    }
   }
 
   &__list {
@@ -109,6 +116,10 @@ export default {
     flex-wrap: wrap;
     justify-content: space-evenly;
     margin-top: 40px;
+
+    @media (min-width: #{$l}) {
+      max-width: 1440px;
+    }
   }
 
   &__item {
@@ -116,8 +127,16 @@ export default {
     width: 45%;
     cursor: pointer;
 
-      @media (min-width: #{$m}) {
-        width: 47%;
+    @media (min-width: #{$m}) {
+      width: 47%;
+    }
+
+    @media (min-width: #{$l}) {
+      width: 31%;
+    }
+
+    @media (min-width: #{$xl}) {
+      width: 24%;
     }
   }
 
