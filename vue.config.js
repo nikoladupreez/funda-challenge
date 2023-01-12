@@ -2,12 +2,14 @@
 module.exports = {
   devServer: {
     proxy: {
-      "/api": {
-        target: "http://partnerapi.funda.nl",
+      "/api/": {
+        target: "http://partnerapi.funda.nl", 
+        headers: {
+          host: "partnerapi.funda.nl"
+        },
+        followRedirects: true,
         changeOrigin: true,
-        secure: false,
-        pathRewrite: {'^/api' : ''},
-        logLevel: 'debug'
+        pathRewrite: {'/api' : '/'}
       }
     }
   },
